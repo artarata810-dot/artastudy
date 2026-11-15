@@ -78,7 +78,7 @@
           <div>
             <span class="text-xl font-bold tracking-tight text-slate-900 flex items-center gap-1.5">
               Artastudy
-              <span class="text-[11px] px-2 py-0.5 rounded font-semibold bg-slate-100 text-slate-700 border border-slate-200">Vercel Ready</span>
+              <span class="text-[11px] px-2 py-0.5 rounded font-semibold bg-slate-100 text-slate-700 border border-slate-200">v1.3</span>
             </span>
             <p class="text-[11px] text-slate-500 leading-none">Academic Research Suite & Paper Architect</p>
           </div>
@@ -108,12 +108,18 @@
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            Deploy ke Vercel
+            Panduan & Cloud Sync
           </button>
         </nav>
 
-        <!-- Right Quick Actions -->
+        <!-- Right Quick Actions: Cloud Sync Button -->
         <div class="flex items-center space-x-2">
+          <!-- Tombol Cloud Sync Multi-Device -->
+          <button onclick="bukaModalCloudSync()" id="btn-cloud-status" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-300 text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 shadow-sm">
+            <span id="dot-cloud-status" class="w-2 h-2 rounded-full bg-slate-400"></span>
+            <span id="text-cloud-status">Cloud Sync (HP & Laptop)</span>
+          </button>
+
           <button onclick="refreshData(true)" title="Segarkan Data" class="p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg">
             <svg id="icon-refresh" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -135,7 +141,8 @@
       <button onclick="navigasiKe('dashboard'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50">Dashboard Riset</button>
       <button onclick="mulaiRisetBaru(); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-blue-700 bg-blue-50">+ Inisiasi Riset Baru</button>
       <button onclick="navigasiKe('jurnal'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50">Koleksi Jurnal & BibTeX</button>
-      <button onclick="navigasiKe('panduan'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50">Deploy ke Vercel</button>
+      <button onclick="bukaModalCloudSync(); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-emerald-700 bg-emerald-50">☁️ Pengaturan Cloud Sync HP & Laptop</button>
+      <button onclick="navigasiKe('panduan'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50">Panduan & Deploy</button>
     </div>
   </header>
 
@@ -156,7 +163,7 @@
             <svg class="w-3.5 h-3.5 text-sky-400" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a10.97 10.97 0 00-.75 4.949V15a1 1 0 00.5.866l6 3.5a1 1 0 001 0l6-3.5a1 1 0 00.5-.866v-1.999a10.97 10.97 0 00-.75-4.95l2.644-1.13a1 1 0 000-1.84l-7-3z"/>
             </svg>
-            Academic Research Suite & Paper Architect (Vercel-Ready)
+            Academic Research Suite (Multi-Device Cloud Sync)
           </div>
           <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Rancang Karya Ilmiah & Publikasi Bereputasi</h1>
           <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
@@ -170,8 +177,8 @@
             </svg>
             Mulai Riset Baru
           </button>
-          <button onclick="navigasiKe('jurnal')" class="px-5 py-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 font-semibold border border-slate-600 text-xs inline-flex items-center justify-center gap-2">
-            Lihat Pustaka BibTeX
+          <button onclick="bukaModalCloudSync()" class="px-5 py-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 font-semibold border border-slate-600 text-xs inline-flex items-center justify-center gap-2">
+            ☁️ Sinkronkan HP & Laptop
           </button>
         </div>
       </div>
@@ -184,7 +191,7 @@
           <div class="space-y-1">
             <p class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Proyek Riset Aktif</p>
             <h3 id="stat-projek" class="text-2xl font-extrabold text-slate-900">0</h3>
-            <p class="text-[11px] text-slate-500">Tersimpan secara lokal</p>
+            <p id="sub-stat-projek" class="text-[11px] text-slate-500">Tersimpan di Cloud & Lokal</p>
           </div>
           <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -600,7 +607,7 @@
             ← Tahap 3: Naskah
           </button>
           <button onclick="selesaikanDanSimpanProjek()" class="px-6 py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm inline-flex items-center gap-1.5">
-            <span>Selesai & Simpan Proyek ke Database</span>
+            <span>Selesai & Simpan Proyek</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
             </svg>
@@ -630,47 +637,45 @@
     </section>
 
     <!-- --------------------------------------------------------------------- -->
-    <!-- VIEW 4: PANDUAN DEPLOY VERCEL -->
+    <!-- VIEW 4: PANDUAN DEPLOY & CLOUD SYNC -->
     <!-- --------------------------------------------------------------------- -->
     <section id="view-panduan" class="hidden space-y-6">
       <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm space-y-6">
         <div class="border-b border-slate-100 pb-3">
-          <h2 class="text-base font-bold text-slate-900">Panduan Deploy Artastudy ke Vercel (Gratis & Cepat)</h2>
-          <p class="text-xs text-slate-500">Ikuti salah satu dari 2 cara mudah di bawah ini untuk mempublikasikan Artastudy ke domain publik:</p>
+          <h2 class="text-base font-bold text-slate-900">Panduan Cloud Sync (Sinkronisasi HP & Laptop)</h2>
+          <p class="text-xs text-slate-500">Langkah mudah menghubungkan Artastudy di HP dan Laptop ke satu Google Sheets Cloud yang sama.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-          <!-- Cara A: Vercel CLI -->
           <div class="border border-slate-200 rounded-xl p-5 bg-slate-50 space-y-3">
             <h3 class="font-bold text-slate-900 flex items-center gap-2 text-sm">
-              <span class="w-6 h-6 rounded-lg bg-slate-900 text-white text-xs flex items-center justify-center font-bold">A</span>
-              Cara 1: Menggunakan Vercel CLI (Super Cepat)
-            </h3>
-            <p class="text-slate-600 leading-relaxed">
-              Buka terminal PowerShell di folder projek ini, lalu jalankan perintah:
-            </p>
-            <div class="bg-slate-900 text-slate-200 p-3 rounded-lg font-mono text-[11px] space-y-1">
-              <p><span class="text-slate-500"># 1. Login ke Vercel (jika belum)</span></p>
-              <p class="text-sky-300">npx vercel login</p>
-              <p><span class="text-slate-500"># 2. Deploy langsung ke Cloud</span></p>
-              <p class="text-emerald-400">npx vercel --prod</p>
-            </div>
-            <p class="text-slate-500 text-[11px]">
-              Jawab pertanyaan di terminal dengan menekan tombol <strong>Enter</strong> untuk setiap konfirmasi default. Dalam 30 detik web app Anda akan aktif di URL publik!
-            </p>
-          </div>
-
-          <!-- Cara B: GitHub Import -->
-          <div class="border border-slate-200 rounded-xl p-5 bg-slate-50 space-y-3">
-            <h3 class="font-bold text-slate-900 flex items-center gap-2 text-sm">
-              <span class="w-6 h-6 rounded-lg bg-blue-700 text-white text-xs flex items-center justify-center font-bold">B</span>
-              Cara 2: Lewat Dashboard Vercel & GitHub
+              <span class="w-6 h-6 rounded-lg bg-emerald-600 text-white text-xs flex items-center justify-center font-bold">1</span>
+              Cara Mengambil Link Web App Google Sheets
             </h3>
             <ol class="list-decimal list-inside space-y-1.5 text-slate-600 leading-relaxed">
-              <li>Upload folder projek ini ke repositori <strong>GitHub</strong> Anda.</li>
-              <li>Buka <a href="https://vercel.com" target="_blank" class="text-blue-700 font-semibold underline">vercel.com</a> dan login akun Anda.</li>
-              <li>Klik <strong>Add New > Project</strong>, lalu pilih repositori GitHub Anda.</li>
-              <li>Klik <strong>Deploy</strong> tanpa perlu mengubah pengaturan build apapun (otomatis terdeteksi via <code class="bg-white px-1 rounded border">vercel.json</code>).</li>
+              <li>Buka file Google Sheets Anda (tempat berkas <code class="bg-white px-1 rounded border">code.gs</code> dan <code class="bg-white px-1 rounded border">setup.gs</code>).</li>
+              <li>Klik menu <strong>Extensions > Apps Script</strong>.</li>
+              <li>Klik tombol biru <strong>Deploy > New deployment</strong> di pojok kanan atas.</li>
+              <li>Pilih tipe <strong>Web app</strong>:
+                <ul class="list-disc list-inside pl-4 text-slate-500 text-[11px] mt-1 space-y-0.5">
+                  <li><em>Execute as:</em> Me (email Anda)</li>
+                  <li><em>Who has access:</em> Anyone</li>
+                </ul>
+              </li>
+              <li>Klik <strong>Deploy</strong>, lalu salin (*copy*) <strong>Web app URL</strong> yang muncul (berakhiran <code class="font-mono text-emerald-700">/exec</code>).</li>
+            </ol>
+          </div>
+
+          <div class="border border-slate-200 rounded-xl p-5 bg-slate-50 space-y-3">
+            <h3 class="font-bold text-slate-900 flex items-center gap-2 text-sm">
+              <span class="w-6 h-6 rounded-lg bg-blue-700 text-white text-xs flex items-center justify-center font-bold">2</span>
+              Cara Menyambungkan di Laptop & HP
+            </h3>
+            <ol class="list-decimal list-inside space-y-1.5 text-slate-600 leading-relaxed">
+              <li>Di website Artastudy (baik di Laptop maupun HP), klik tombol <strong>"Cloud Sync"</strong> di pojok kanan atas.</li>
+              <li>Tempel (*paste*) Web App URL yang Anda salin tadi.</li>
+              <li>Klik tombol <strong>"Tes & Sambungkan Cloud"</strong>.</li>
+              <li><strong>Selesai!</strong> Sekarang setiap riset yang Anda simpan di Laptop akan langsung otomatis muncul di HP Anda (dan sebaliknya).</li>
             </ol>
           </div>
         </div>
@@ -680,6 +685,70 @@
   </main>
 
   <!-- ========================================================================= -->
+  <!-- MODAL CLOUD SYNC MANAGER (HP & LAPTOP SYNC) -->
+  <!-- ========================================================================= -->
+  <div id="modal-cloud-sync" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 space-y-5">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+            ☁️
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-slate-900">Sinkronisasi Cloud Multi-Perangkat</h3>
+            <p class="text-[11px] text-slate-500">Hubungkan HP dan Laptop ke satu Google Sheets Cloud</p>
+          </div>
+        </div>
+        <button onclick="tutupModalCloudSync()" class="text-slate-400 hover:text-slate-700 text-sm font-bold">✕</button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">URL Google Apps Script Web App Anda:</label>
+          <input type="url" id="input-cloud-url" placeholder="https://script.google.com/macros/s/.../exec" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono text-[11px] focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+          <p class="text-[10px] text-slate-400 mt-1">Dapatkan link ini dari Apps Script Google Sheets Anda (Deploy > New deployment > Web app > Anyone).</p>
+        </div>
+
+        <div class="flex gap-2">
+          <button onclick="tesDanSambungkanCloud()" id="btn-tes-cloud" class="flex-grow py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm">
+            Tes & Sambungkan Cloud
+          </button>
+          <button onclick="putusKoneksiCloud()" class="px-3 py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold text-xs">
+            Putus
+          </button>
+        </div>
+
+        <!-- Status Box -->
+        <div id="box-cloud-info" class="p-3 rounded-lg border text-[11px] bg-slate-50 border-slate-200 text-slate-600">
+          Status saat ini: <strong id="label-cloud-connection">Mode Memori Lokal (Hanya di perangkat ini)</strong>
+        </div>
+
+        <!-- Tombol Cepat Bagikan ke HP -->
+        <div id="box-share-hp" class="hidden p-3 rounded-lg bg-emerald-50 border border-emerald-200 space-y-2">
+          <p class="text-emerald-900 font-bold text-[11px]">Bagikan Sinkronisasi ke HP Anda:</p>
+          <p class="text-[10px] text-emerald-800">Buka link berikut di browser HP Anda, otomatis langsung terhubung ke database yang sama:</p>
+          <div class="flex gap-1.5">
+            <input type="text" id="share-sync-link" readonly class="flex-grow p-1.5 bg-white border border-emerald-300 rounded text-[10px] font-mono select-all">
+            <button onclick="salinSyncLink()" class="px-3 py-1 bg-emerald-700 text-white rounded text-[10px] font-bold">Salin</button>
+          </div>
+        </div>
+
+        <!-- Cadangan File Darurat -->
+        <div class="border-t border-slate-100 pt-3 flex items-center justify-between">
+          <span class="text-slate-500 text-[11px]">Pilihan Cadangan File (.json):</span>
+          <div class="space-x-1">
+            <button onclick="eksporFileCadangan()" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded text-[11px]">Ekspor JSON</button>
+            <label class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded text-[11px] cursor-pointer inline-block">
+              Impor JSON
+              <input type="file" id="file-import-json" accept=".json" onchange="imporFileCadangan(event)" class="hidden">
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
   <!-- TOAST NOTIFICATION KUSTOM -->
   <!-- ========================================================================= -->
   <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-2 max-w-sm"></div>
@@ -687,19 +756,19 @@
   <!-- Footer Standar ZettBOT -->
   <footer class="bg-white border-t border-slate-200 py-4 mt-8">
     <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500">
-      <p>Artastudy Professional Suite v1.2.0 (Vercel Ready) &copy; 2026. Dirancang dengan Standar Arsitektur Sistem <strong>ZettBOT by Zettbos</strong>.</p>
+      <p>Artastudy Professional Suite v1.3.0 &copy; 2026. Dirancang dengan Standar Arsitektur Sistem <strong>ZettBOT by Zettbos</strong>.</p>
     </div>
   </footer>
 
   <!-- ========================================================================= -->
-  <!-- LOGIKA JAVASCRIPT MODULAR & IN-MEMORY CACHE (VERCEL STANDALONE) -->
+  <!-- LOGIKA JAVASCRIPT MODULAR & CLOUD SYNC ENGINE -->
   <!-- ========================================================================= -->
   <script>
     /**
-     * STATE MANAGEMENT (Hybrid Vercel / GAS In-Memory Cache)
+     * STATE MANAGEMENT (Hybrid Cloud Sync & Local Storage)
      */
     const state = {
-      userEmail: 'peneliti@artastudy.ac.id',
+      cloudUrl: localStorage.getItem('artastudy_cloud_url') || '',
       summary: null,
       projekList: [],
       jurnalList: [],
@@ -725,18 +794,34 @@
       activeSection: 'abstrak-id'
     };
 
-    const isGAS = (typeof google !== 'undefined' && google.script && google.script.run);
-
     /**
-     * Inisialisasi Storage Lokal & Aplikasi
+     * Inisialisasi Aplikasi Saat Memuat Halaman
      */
     document.addEventListener('DOMContentLoaded', function () {
+      periksaUrlHashSync();
       initStorageEngine();
-      initApp();
+      updateCloudStatusBadge();
+      loadDashboardData();
     });
 
+    /**
+     * Otomatis deteksi parameter #sync=... di URL (agar mudah buka di HP)
+     */
+    function periksaUrlHashSync() {
+      if (window.location.hash && window.location.hash.indexOf('#sync=') === 0) {
+        try {
+          const syncUrl = decodeURIComponent(window.location.hash.replace('#sync=', ''));
+          if (syncUrl.indexOf('script.google.com') !== -1) {
+            localStorage.setItem('artastudy_cloud_url', syncUrl);
+            state.cloudUrl = syncUrl;
+            tampilkanToast('Database Cloud otomatis tersambung dari tautan sinkronisasi!', 'success');
+            window.location.hash = '';
+          }
+        } catch (e) {}
+      }
+    }
+
     function initStorageEngine() {
-      // Inisialisasi data lokal jika belum ada di browser
       if (!localStorage.getItem('artastudy_projects')) {
         const demoProjects = [
           {
@@ -785,9 +870,178 @@
       }
     }
 
-    function initApp() {
-      tampilkanToast('Artastudy Vercel Suite siap digunakan!', 'info');
+    /**
+     * Update Tampilan Status Cloud Sync di Navbar
+     */
+    function updateCloudStatusBadge() {
+      const dot = document.getElementById('dot-cloud-status');
+      const text = document.getElementById('text-cloud-status');
+      const info = document.getElementById('label-cloud-connection');
+      const boxShare = document.getElementById('box-share-hp');
+
+      if (state.cloudUrl) {
+        dot.className = 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse';
+        text.innerText = 'Cloud Terhubung (HP & Laptop)';
+        if (info) info.innerHTML = '<span class="text-emerald-700 font-bold">🟢 Aktif Tersambung ke Google Sheets Cloud</span>';
+        if (boxShare) {
+          boxShare.classList.remove('hidden');
+          const shareUrl = window.location.origin + window.location.pathname + '#sync=' + encodeURIComponent(state.cloudUrl);
+          document.getElementById('share-sync-link').value = shareUrl;
+        }
+      } else {
+        dot.className = 'w-2 h-2 rounded-full bg-slate-400';
+        text.innerText = 'Cloud Sync (Hubungkan HP & Laptop)';
+        if (info) info.innerHTML = '<span class="text-slate-600">⚪ Mode Memori Lokal (Data belum tersinkron ke perangkat lain)</span>';
+        if (boxShare) boxShare.classList.add('hidden');
+      }
+    }
+
+    function bukaModalCloudSync() {
+      document.getElementById('input-cloud-url').value = state.cloudUrl;
+      document.getElementById('modal-cloud-sync').classList.remove('hidden');
+      updateCloudStatusBadge();
+    }
+
+    function tutupModalCloudSync() {
+      document.getElementById('modal-cloud-sync').classList.add('hidden');
+    }
+
+    function tesDanSambungkanCloud() {
+      const url = document.getElementById('input-cloud-url').value.trim();
+      if (!url) {
+        tampilkanToast('Masukkan URL Google Apps Script Web App Anda!', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('btn-tes-cloud');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="animate-spin mr-1">⌛</span> Mengetes koneksi Google Sheets...';
+
+      const pingUrl = url + (url.indexOf('?') === -1 ? '?' : '&') + 'action=ping';
+
+      fetch(pingUrl)
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          btn.disabled = false;
+          btn.innerHTML = 'Tes & Sambungkan Cloud';
+          if (data && data.sukses) {
+            localStorage.setItem('artastudy_cloud_url', url);
+            state.cloudUrl = url;
+            updateCloudStatusBadge();
+            tampilkanToast('Berhasil! Database Cloud Google Sheets terhubung!', 'success');
+            tarikDataDariCloud();
+          } else {
+            tampilkanToast(data.pesan || 'Gagal tersambung ke script', 'error');
+          }
+        })
+        .catch(function (err) {
+          btn.disabled = false;
+          btn.innerHTML = 'Tes & Sambungkan Cloud';
+          tampilkanToast('Koneksi gagal. Pastikan pengaturan Web App di Apps Script disetel ke "Anyone".', 'error');
+        });
+    }
+
+    function putusKoneksiCloud() {
+      localStorage.removeItem('artastudy_cloud_url');
+      state.cloudUrl = '';
+      document.getElementById('input-cloud-url').value = '';
+      updateCloudStatusBadge();
+      tampilkanToast('Koneksi Cloud diputus. Aplikasi beralih ke memori lokal.', 'info');
       loadDashboardData();
+    }
+
+    function salinSyncLink() {
+      const input = document.getElementById('share-sync-link');
+      input.select();
+      navigator.clipboard.writeText(input.value).then(function () {
+        tampilkanToast('Tautan sinkronisasi disalin! Kirim ke WA/Telegram Anda lalu buka di HP.', 'success');
+      });
+    }
+
+    /**
+     * Tarik Data Terbaru dari Cloud Google Sheets
+     */
+    function tarikDataDariCloud() {
+      if (!state.cloudUrl) return;
+
+      const fetchUrl = state.cloudUrl + (state.cloudUrl.indexOf('?') === -1 ? '?' : '&') + 'action=get_all';
+      fetch(fetchUrl)
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          if (data && data.sukses && data.projects) {
+            localStorage.setItem('artastudy_projects', JSON.stringify(data.projects));
+            if (data.journals) {
+              localStorage.setItem('artastudy_journals', JSON.stringify(data.journals));
+            }
+            loadDashboardData();
+            tampilkanToast('Data tersinkronisasi dari Google Sheets Cloud!', 'success');
+          }
+        })
+        .catch(function (e) {
+          console.log('Sync note: offline fallback active');
+        });
+    }
+
+    /**
+     * Kirim Data ke Cloud Secara Background
+     */
+    function kirimDataKeCloud(action, dataPayload) {
+      if (!state.cloudUrl) return;
+
+      // Kirim via fetch POST JSON
+      fetch(state.cloudUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          action: action,
+          data: dataPayload
+        })
+      }).catch(function (e) {
+        console.log('Background cloud push queued');
+      });
+    }
+
+    /**
+     * Cadangan File (.json)
+     */
+    function eksporFileCadangan() {
+      const backup = {
+        app: 'Artastudy',
+        version: '1.3.0',
+        date: new Date().toISOString(),
+        projects: JSON.parse(localStorage.getItem('artastudy_projects') || '[]'),
+        journals: JSON.parse(localStorage.getItem('artastudy_journals') || '[]')
+      };
+      const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'artastudy-backup-' + new Date().toISOString().split('T')[0] + '.json';
+      a.click();
+      tampilkanToast('File cadangan JSON berhasil diunduh!', 'success');
+    }
+
+    function imporFileCadangan(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        try {
+          const json = JSON.parse(e.target.result);
+          if (json.projects) {
+            localStorage.setItem('artastudy_projects', JSON.stringify(json.projects));
+          }
+          if (json.journals) {
+            localStorage.setItem('artastudy_journals', JSON.stringify(json.journals));
+          }
+          loadDashboardData();
+          tutupModalCloudSync();
+          tampilkanToast('Data dari file cadangan berhasil diimpor!', 'success');
+        } catch (err) {
+          tampilkanToast('Format file JSON tidak valid', 'error');
+        }
+      };
+      reader.readAsText(file);
     }
 
     /**
@@ -850,7 +1104,7 @@
         state.projekList = projects;
         updateDashboardUI();
         renderTabelProjek(projects);
-      }, 200);
+      }, 150);
     }
 
     function updateDashboardUI() {
@@ -858,6 +1112,15 @@
       document.getElementById('stat-projek').innerText = state.summary.totalProjek;
       document.getElementById('stat-jurnal').innerText = state.summary.totalJurnal;
       document.getElementById('stat-selesai').innerText = state.summary.totalSelesai;
+      
+      const sub = document.getElementById('sub-stat-projek');
+      if (state.cloudUrl) {
+        sub.innerText = 'Tersinkron ke Google Sheets';
+        sub.className = 'text-[11px] text-emerald-600 font-semibold';
+      } else {
+        sub.innerText = 'Tersimpan di Memori Lokal';
+        sub.className = 'text-[11px] text-slate-500';
+      }
     }
 
     function renderTabelProjek(list) {
@@ -1110,7 +1373,7 @@
     }
 
     /**
-     * Langkah 2: Crossref REST API Fetching Langsung di Browser
+     * Langkah 2: Crossref REST API Fetching
      */
     function cariJurnalScholar() {
       const q = document.getElementById('input-scholar-query').value.trim() || state.activeProjek.topik || 'educational technology adaptive learning';
@@ -1118,7 +1381,6 @@
       btn.disabled = true;
       btn.innerHTML = '<span class="animate-spin mr-1">⌛</span> Menelusuri Crossref & Scholar...';
 
-      // Panggil Crossref API publik langsung dari browser (CORS enabled)
       fetch('https://api.crossref.org/works?query=' + encodeURIComponent(q) + '&rows=6&sort=relevance')
         .then(function (response) {
           if (!response.ok) throw new Error('Network error');
@@ -1168,7 +1430,6 @@
           renderHasilScholar(papers);
         })
         .catch(function (err) {
-          // Fallback kurasi paper jika offline
           btn.disabled = false;
           btn.innerHTML = '<span>Cari Paper Akademik</span>';
           renderHasilScholar([
@@ -1253,7 +1514,7 @@
 
       // Simpan ke katalog lokal
       const journals = JSON.parse(localStorage.getItem('artastudy_journals') || '[]');
-      journals.unshift({
+      const newJrn = {
         idJurnal: 'JRN-' + Date.now(),
         idProjek: state.activeProjek.idProjek || 'ACTIVE',
         judul: ref.judul,
@@ -1264,8 +1525,12 @@
         metodePaper: ref.metodePaper,
         temuanUtama: ref.temuanUtama,
         ringkasan: ref.ringkasan
-      });
+      };
+      journals.unshift(newJrn);
       localStorage.setItem('artastudy_journals', JSON.stringify(journals));
+
+      // Jika terhubung Cloud Sync, simpan ke Google Sheets juga
+      kirimDataKeCloud('save_journal', newJrn);
     }
 
     function perbaruiMatriksLiteratur() {
@@ -1328,7 +1593,6 @@
         btn.disabled = false;
         btn.innerHTML = '<span>Sintesis Naskah (AI)</span>';
 
-        // Sintesis Sitasi
         let daftarPustaka = [];
         let kutipanText = '';
         if (payload.referensi && payload.referensi.length > 0) {
@@ -1353,7 +1617,6 @@
           kutipanText = (payload.gayaSitasi === 'IEEE') ? '[1], [2]' : '(Creswell, 2018; Sugiyono, 2020)';
         }
 
-        // Abstrak Dwibahasa
         state.abstrak = {
           abstrakId: 'Penelitian ini bertujuan untuk menginvestigasi secara komprehensif implementasi dan efektivitas ' + payload.topik + ' dalam konteks akademik kontemporer. Latar belakang penelitian ini dilandasi oleh ' + payload.gap + ' Metode yang digunakan adalah ' + payload.metode + ' dengan teknik pengumpulan data berbasis telaah instrumen terstandar dan triangulasi sumber data ilmiah. Hasil penelitian menunjukkan bahwa integrasi strategi ini menghasilkan peningkatan signifikan terhadap pemahaman konseptual dan keterlibatan aktif peserta. Kebaruan penelitian ini terletak pada ' + payload.novelty + ' Implikasi praktis dari temuan ini memberikan panduan operasional bagi praktisi dalam merancang kerangka kerja riset mandiri yang terukur dan berkelanjutan.',
           kataKunciId: payload.topik + ', ' + payload.metode.split('(')[0].trim() + ', Efektivitas Pembelajaran, Karya Ilmiah, Inovasi Pendidikan',
@@ -1361,7 +1624,6 @@
           keywordsEn: payload.topik + ', ' + payload.metode.split('(')[0].trim() + ', Educational Efficacy, Scholarly Inquiry, Academic Innovation'
         };
 
-        // Bab I - V
         state.draftBabList = [
           {
             judulBab: 'BAB I: PENDAHULUAN',
@@ -1501,16 +1763,13 @@
       tampilkanToast('Berkas .bib berhasil diunduh untuk Mendeley / Zotero!', 'success');
     }
 
-    /**
-     * Unduh File .doc Standar Skripsi / Google Docs Baku
-     */
     function unduhBerkasDoc() {
       const judul = document.getElementById('selected-judul').value || state.activeProjek.judul || 'Draf Karya Ilmiah';
       
       let htmlDoc = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">' +
         '<head><meta charset="utf-8"><title>' + judul + '</title>' +
         '<style>' +
-        '@page { size: 21cm 29.7cm; margin: 3cm 3cm 3cm 4cm; }' + // Standar Skripsi: Kiri 4cm, Atas/Kanan/Bawah 3cm
+        '@page { size: 21cm 29.7cm; margin: 3cm 3cm 3cm 4cm; }' +
         'body { font-family: "Times New Roman", Times, serif; font-size: 12pt; line-height: 1.5; text-align: justify; }' +
         'h1 { font-size: 14pt; text-align: center; text-transform: uppercase; font-weight: bold; margin-bottom: 24pt; }' +
         'h2 { font-size: 13pt; font-weight: bold; margin-top: 18pt; margin-bottom: 6pt; }' +
@@ -1520,23 +1779,19 @@
         '.bib-item { padding-left: 24pt; text-indent: -24pt; margin-bottom: 8pt; font-size: 11pt; line-height: 1.15; }' +
         '</style></head><body>';
 
-      // Cover Judul
       htmlDoc += '<h1>' + judul + '</h1>';
       htmlDoc += '<p style="text-align:center; font-style:italic; font-size:10pt;">Draf Naskah Karya Ilmiah - Disusun dengan Artastudy Academic Suite<br>Tanggal: ' + new Date().toLocaleDateString('id-ID') + '</p><hr style="margin:24pt 0;">';
 
-      // Abstrak
       if (state.abstrak) {
         htmlDoc += '<h2 style="text-align:center;">ABSTRAK</h2><p>' + state.abstrak.abstrakId + '</p><p><strong>Kata Kunci:</strong> ' + state.abstrak.kataKunciId + '</p><br>';
         htmlDoc += '<h2 style="text-align:center;">ABSTRACT</h2><p style="font-style:italic;">' + state.abstrak.abstrakEn + '</p><p><strong>Keywords:</strong> ' + state.abstrak.keywordsEn + '</p><br>';
       }
 
-      // Bab 1 - 5
       state.draftBabList.forEach(function (b) {
         htmlDoc += '<h2>' + b.judulBab + '</h2>';
         htmlDoc += '<p>' + b.konten.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>') + '</p>';
       });
 
-      // Matriks Literatur
       if (state.matrix && state.matrix.length > 0) {
         htmlDoc += '<h2>LAMPIRAN: MATRIKS SINTESIS LITERATUR</h2>';
         htmlDoc += '<table><thead><tr><th>No</th><th>Penulis & Tahun</th><th>Judul Paper</th><th>Metodologi</th><th>Temuan Kunci</th></tr></thead><tbody>';
@@ -1546,7 +1801,6 @@
         htmlDoc += '</tbody></table>';
       }
 
-      // Daftar Pustaka
       htmlDoc += '<h2>DAFTAR PUSTAKA</h2>';
       state.draftDaftarPustaka.forEach(function (bib) {
         htmlDoc += '<p class="bib-item">' + bib.replace(/\*/g, '') + '</p>';
@@ -1562,9 +1816,6 @@
       tampilkanToast('File .doc berhasil diunduh! Siap dibuka di Google Docs & Word.', 'success');
     }
 
-    /**
-     * Salin Teks Naskah Lengkap untuk Google Docs
-     */
     function salinFormatUntukGoogleDocs() {
       let fullText = (document.getElementById('selected-judul').value || state.activeProjek.judul) + '\n\n';
       if (state.abstrak) {
@@ -1596,7 +1847,7 @@
         state.activeProjek.tanggal = new Date().toLocaleString('id-ID');
       }
 
-      // Simpan ke LocalStorage
+      // Simpan lokal
       const projects = JSON.parse(localStorage.getItem('artastudy_projects') || '[]');
       const existIdx = projects.findIndex(function (p) { return p.idProjek === state.activeProjek.idProjek; });
       if (existIdx >= 0) {
@@ -1605,6 +1856,9 @@
         projects.unshift(state.activeProjek);
       }
       localStorage.setItem('artastudy_projects', JSON.stringify(projects));
+
+      // Jika terhubung Cloud, otomatis kirim ke Google Sheets
+      kirimDataKeCloud('save_project', state.activeProjek);
 
       tampilkanToast('Proyek ' + state.activeProjek.idProjek + ' berhasil disimpan!', 'success');
       loadDashboardData();
@@ -1616,6 +1870,16 @@
       let projects = JSON.parse(localStorage.getItem('artastudy_projects') || '[]');
       projects = projects.filter(function (p) { return p.idProjek !== idProjek; });
       localStorage.setItem('artastudy_projects', JSON.stringify(projects));
+
+      // Hapus di cloud jika terhubung
+      if (state.cloudUrl) {
+        fetch(state.cloudUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: 'delete_project', idProjek: idProjek })
+        }).catch(function(e){});
+      }
+
       tampilkanToast('Proyek ' + idProjek + ' dihapus', 'success');
       loadDashboardData();
     }
@@ -1653,7 +1917,11 @@
     }
 
     function refreshData(manual) {
-      loadDashboardData();
+      if (state.cloudUrl) {
+        tarikDataDariCloud();
+      } else {
+        loadDashboardData();
+      }
       if (manual) tampilkanToast('Data berhasil diperbarui!', 'success');
     }
 
