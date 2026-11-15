@@ -1,0 +1,21 @@
+{
+  "name": "artastudy",
+  "version": "1.2.0",
+  "description": "Artastudy - Academic Research Suite & Paper Architect",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "academic",
+    "research-assistant",
+    "google-scholar",
+    "literature-matrix",
+    "bibtex",
+    "mendeley",
+    "zotero"
+  ],
+  "author": "Artastudy by Zettbos",
+  "license": "MIT"
+}
+
